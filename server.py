@@ -18,11 +18,11 @@ print(f"Server started on port {PORT}!")
 # Listen for connections
 while True:
     # Receive client connections
-    client_socket, client_addr = server_socket.accept()
+    communication_socket, client_addr = server_socket.accept()
     print(f"Connected to {client_addr}!")
 
     # Client will send information
-    client_message = client_socket.recv(1024).decode(
+    client_message = communication_socket.recv(1024).decode(
         "utf-8"
     )  # 1024 is the max byte size for responses
     print(f"Message from client: {client_message}")
@@ -31,8 +31,8 @@ while True:
     server_response = "Thank you for your message!".encode("utf-8")
 
     # Send the server response
-    client_socket.send(server_response)
+    communication_socket.send(server_response)
 
     # Terminate the connection
-    client_socket.close()
+    communication_socket.close()
     print(f"Connection with {client_addr} terminated!")
